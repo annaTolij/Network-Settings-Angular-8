@@ -1,0 +1,169 @@
+<form [formGroup]="networkSettingsForm" class="form-group" (ngSubmit)="submit()" class="container">
+  <div class="row">
+    <div class="col">
+      <h6>Ethernrt settings</h6>
+      <fieldset formGroupName="ethernetSettings">
+        <fieldset formGroupName="ipSettings">
+          <div class="custom-control custom-radio">
+            <input formControlName="isAutoIpAdress" type="radio" id="isAutoIpAdressEthernet" value="true"
+              class="custom-control-input">
+            <label class="custom-control-label" for="isAutoIpAdressEthernet">Obtain an IP address aautomatically
+              (DHCP/BootP)</label>
+          </div>
+
+          <div class="custom-control custom-radio">
+            <input formControlName="isAutoIpAdress" type="radio" id="isAutoIpAdressEthernet2" value="false"
+              class="custom-control-input">
+            <label class="custom-control-label" for="isAutoIpAdressEthernet2">Use the following IP address:</label>
+          </div>
+
+          <div class="row justify-content-end">
+            <label for="ipAdress" class="col col-form-label text-right">IP address: *</label>
+            <div class="col">
+              <input formControlName="ipAdress" id="ipAdress" type="text" class="form-control">
+            </div>
+          </div>
+
+          <div class="row justify-content-end">
+            <label for="masck" class="col col-form-label text-right">Subnet Mask: *</label>
+            <div class="col">
+              <input formControlName="masck" id="masck" type="text" class="form-control">
+            </div>
+          </div>
+
+          <div class="row justify-content-end">
+            <label for="gateway" class="col col-form-label text-right">Default Gateway: *</label>
+            <div class="col">
+              <input formControlName="gateway" id="gateway" type="text" class="form-control">
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset formGroupName="dnsSettings">
+          <div class="custom-control custom-radio">
+            <input formControlName="isAutoDnsAdress" type="radio" id="isAutoDnsAdressEthernet" value="true"
+              class="custom-control-input">
+            <label class="custom-control-label" for="isAutoDnsAdressEthernet">Obtain DNS server address
+              automatically</label>
+          </div>
+          <div class="custom-control custom-radio">
+            <input formControlName="isAutoDnsAdress" type="radio" id="isAutoDnsAdressEthernet2" value="false"
+              class="custom-control-input">
+            <label class="custom-control-label" for="isAutoDnsAdressEthernet2">Use the following DS server
+              address:</label>
+          </div>
+
+          <div class="row">
+            <label for="preferredDns" class="col col-form-label">Preferred DNS server:</label>
+            <div class="col">
+              <input formControlName="preferredDns" id="preferredDns" type="text" class="form-control">
+            </div>
+          </div>
+
+          <div class="row">
+            <label for="alternativeDns" class="col col-form-label">Alternative DNS server:</label>
+            <div class="col">
+              <input formControlName="alternativeDns" id="alternativeDns" type="text" class="form-control">
+            </div>
+          </div>
+        </fieldset>
+      </fieldset>
+    </div>
+
+    <div class="col">
+      <h6>Wireless settings</h6>
+      <fieldset formGroupName="wirelessSettings">
+        <div class="custom-control custom-checkbox">
+          <input formControlName="isEnabledWifi" type="checkbox" class="custom-control-input" id="isEnabledWifi">
+          <label class="custom-control-label" for="isEnabledWifi">Enable wifi:</label>
+        </div>
+        <mat-form-field class="row">
+          <label for="networkName">Wireless Network Name</label>
+          <mat-select formControlName="networkName" id="networkName">
+            <mat-option *ngFor="let wirelessName of wirelessNames" [value]="wirelessName.id">
+              {{wirelessName.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <div class="custom-control custom-checkbox">
+          <input formControlName="isEnabledWireless" type="checkbox" class="custom-control-input"
+            id="isEnabledWireless">
+          <label class="custom-control-label" for="isEnabledWireless">Enable Wireless Security:</label>
+        </div>
+
+        <div class="row">
+          <label for="securityKey" class="col">Security Key</label>
+          <div class="col">
+            <input formControlName="securityKey" id="securityKey" placeholder="введите имя" type="text"
+              class="form-control">
+          </div>
+        </div>
+
+        <fieldset formGroupName="ipSettings">
+          <div class="custom-control custom-radio">
+            <input formControlName="isAutoIpAdress" type="radio" id="isAutoIpAdressWireless" value="true"
+              class="custom-control-input">
+            <label class="custom-control-label" for="isAutoIpAdressWireless">Obtain an IP address aautomatically
+              (DHCP/BootP)</label>
+          </div>
+          <div class="custom-control custom-radio">
+            <input formControlName="isAutoIpAdress" type="radio" id="isAutoIpAdressWireless2" value="false"
+              class="custom-control-input">
+            <label class="custom-control-label" for="isAutoIpAdressWireless2">Use the following IP address:</label>
+          </div>
+
+          <div class="row">
+            <label for="ipAdressWireless" class="col col-form-label">IP address: *</label>
+            <div class="col">
+              <input formControlName="ipAdress" id="ipAdressWireless" type="text" class="form-control">
+            </div>
+          </div>
+
+          <div class="row">
+            <label for="masckWireless" class="col col-form-label">Subnet Mask: *</label>
+            <div class="col">
+              <input formControlName="masck" id="masckWireless" type="text" class="form-control">
+            </div>
+          </div>
+
+          <div class="row">
+            <label for="gatewayWireless" class="col col-form-label">DefaUlt Gatemay:</label>
+            <div class="col">
+              <input formControlName="gateway" id="gatewayWireless" type="text" class="form-control">
+            </div>
+          </div>
+        </fieldset>
+        <fieldset formGroupName="dnsSettings">
+          <div class="custom-control custom-radio">
+            <input formControlName="isAutoDnsAdress" type="radio" id="isAutoDnsAdressWireless" value="true"
+              class="custom-control-input">
+            <label class="custom-control-label" for="isAutoDnsAdressWireless">Obtain DNS server address
+              automatically</label>
+          </div>
+
+          <div class="custom-control custom-radio">
+            <input formControlName="isAutoDnsAdress" type="radio" id="isAutoDnsAdressWireless2" value="false"
+              class="custom-control-input">
+            <label class="custom-control-label" for="isAutoDnsAdressWireless2">Use the following DS server
+              address:</label>
+          </div>
+
+          <div class="row">
+            <label for="preferredDnsWireless" class="col col-form-label">Preferred DNS server: *</label>
+            <div class="col">
+              <input formControlName="preferredDns" id="preferredDnsWireless" type="text" class="form-control">
+            </div>
+          </div>
+
+          <div class="row">
+            <label for="alternativeDnsWireless" class="col col-form-label">Alternative DNS server:</label>
+            <div class="col">
+              <input formControlName="alternativeDns" id="alternativeDnsWireless" type="text" class="form-control">
+            </div>
+          </div>
+        </fieldset>
+      </fieldset>
+    </div>
+  </div>
+  <button type="submit" class="btn btn-primary">Save</button>
+</form>
