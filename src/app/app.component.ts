@@ -110,123 +110,128 @@ export class AppComponent implements OnInit {
     this.subscribeOnDnsSettings('ethernetSettings');
     this.subscribeOnDnsSettings('wirelessSettings');
 
-    this.networkSettingsForm.get('wirelessSettings').get('isEnabledWireless').valueChanges.subscribe((value: boolean) => {
+    const getWirelessSettings = this.networkSettingsForm.get('wirelessSettings');
+    const getEthernetSettings = this.networkSettingsForm.get('ethernetSettings');
+
+    getWirelessSettings.get('isEnabledWireless').valueChanges.subscribe((value: boolean) => {
       if (value) {
-        this.networkSettingsForm.get('wirelessSettings').get('securityKey').enable();
-        this.networkSettingsForm.get('wirelessSettings').get('securityKey').setValidators([Validators.required]);
+        getWirelessSettings.get('securityKey').enable();
+        getWirelessSettings.get('securityKey').setValidators([Validators.required]);
 
       } else {
-        this.networkSettingsForm.get('wirelessSettings').get('securityKey').disable();
-        this.networkSettingsForm.get('wirelessSettings').get('securityKey').reset('');
-        this.networkSettingsForm.get('wirelessSettings').get('securityKey').clearValidators();
+        getWirelessSettings.get('securityKey').disable();
+        getWirelessSettings.get('securityKey').reset('');
+        getWirelessSettings.get('securityKey').clearValidators();
 
       }
-      this.networkSettingsForm.get('wirelessSettings').get('securityKey').updateValueAndValidity();
+      getWirelessSettings.get('securityKey').updateValueAndValidity();
 
     });
 
-    this.networkSettingsForm.get('wirelessSettings').get('isEnabledWifi').valueChanges.subscribe((value: boolean) => {
+    getWirelessSettings.get('isEnabledWifi').valueChanges.subscribe((value: boolean) => {
       if (value) {
-        this.networkSettingsForm.get('wirelessSettings').get('networkName').enable();
-        this.networkSettingsForm.get('wirelessSettings').get('isEnabledWireless').enable();
-        this.networkSettingsForm.get('wirelessSettings').get('ipSettings').get('isAutoIpAdress').enable();
-        this.networkSettingsForm.get('wirelessSettings').get('dnsSettings').get('isAutoDnsAdress').enable();
+        getWirelessSettings.get('networkName').enable();
+        getWirelessSettings.get('isEnabledWireless').enable();
+        getWirelessSettings.get('ipSettings').get('isAutoIpAdress').enable();
+        getWirelessSettings.get('dnsSettings').get('isAutoDnsAdress').enable();
 
-        this.networkSettingsForm.get('wirelessSettings').get('networkName').setValidators([Validators.required]);
+        getWirelessSettings.get('networkName').setValidators([Validators.required]);
       } else {
-        this.networkSettingsForm.get('wirelessSettings').get('networkName').disable();
-        this.networkSettingsForm.get('wirelessSettings').get('isEnabledWireless').disable();
-        this.networkSettingsForm.get('wirelessSettings').get('ipSettings').get('isAutoIpAdress').disable();
-        this.networkSettingsForm.get('wirelessSettings').get('dnsSettings').get('isAutoDnsAdress').disable();
+        getWirelessSettings.get('networkName').disable();
+        getWirelessSettings.get('isEnabledWireless').disable();
+        getWirelessSettings.get('ipSettings').get('isAutoIpAdress').disable();
+        getWirelessSettings.get('dnsSettings').get('isAutoDnsAdress').disable();
 
-        this.networkSettingsForm.get('wirelessSettings').get('networkName').reset('');
-        this.networkSettingsForm.get('wirelessSettings').get('isEnabledWireless').reset(false);
-        this.networkSettingsForm.get('wirelessSettings').get('ipSettings').get('isAutoIpAdress').reset('true');
-        this.networkSettingsForm.get('wirelessSettings').get('dnsSettings').get('isAutoDnsAdress').reset('true');
+        getWirelessSettings.get('networkName').reset('');
+        getWirelessSettings.get('isEnabledWireless').reset(false);
+        getWirelessSettings.get('ipSettings').get('isAutoIpAdress').reset('true');
+        getWirelessSettings.get('dnsSettings').get('isAutoDnsAdress').reset('true');
 
-        this.networkSettingsForm.get('wirelessSettings').get('networkName').clearValidators();
+        getWirelessSettings.get('networkName').clearValidators();
       }
 
-      this.networkSettingsForm.get('wirelessSettings').get('networkName').updateValueAndValidity();
+      getWirelessSettings.get('networkName').updateValueAndValidity();
     });
 
     if(!!this.networkSettings){
-      this.networkSettingsForm.get('ethernetSettings').get('ipSettings').get('isAutoIpAdress').setValue(this.networkSettings.ethernetSettings.ipSettings.isAutoIpAdress);
-      this.networkSettingsForm.get('ethernetSettings').get('ipSettings').get('ipAdress').setValue(this.networkSettings.ethernetSettings.ipSettings.ipAdress);
-      this.networkSettingsForm.get('ethernetSettings').get('ipSettings').get('masck').setValue(this.networkSettings.ethernetSettings.ipSettings.masck);
-      this.networkSettingsForm.get('ethernetSettings').get('ipSettings').get('gateway').setValue(this.networkSettings.ethernetSettings.ipSettings.gateway);
-      this.networkSettingsForm.get('ethernetSettings').get('dnsSettings').get('isAutoDnsAdress').setValue(this.networkSettings.ethernetSettings.dnsSettings.isAutoDnsAdress);
-      this.networkSettingsForm.get('ethernetSettings').get('dnsSettings').get('preferredDns').setValue(this.networkSettings.ethernetSettings.dnsSettings.preferredDns);
-      this.networkSettingsForm.get('ethernetSettings').get('dnsSettings').get('alternativeDns').setValue(this.networkSettings.ethernetSettings.dnsSettings.alternativeDns);
+      getEthernetSettings.get('ipSettings').get('isAutoIpAdress').setValue(this.networkSettings.ethernetSettings.ipSettings.isAutoIpAdress);
+      getEthernetSettings.get('ipSettings').get('ipAdress').setValue(this.networkSettings.ethernetSettings.ipSettings.ipAdress);
+      getEthernetSettings.get('ipSettings').get('masck').setValue(this.networkSettings.ethernetSettings.ipSettings.masck);
+      getEthernetSettings.get('ipSettings').get('gateway').setValue(this.networkSettings.ethernetSettings.ipSettings.gateway);
+      getEthernetSettings.get('dnsSettings').get('isAutoDnsAdress').setValue(this.networkSettings.ethernetSettings.dnsSettings.isAutoDnsAdress);
+      getEthernetSettings.get('dnsSettings').get('preferredDns').setValue(this.networkSettings.ethernetSettings.dnsSettings.preferredDns);
+      getEthernetSettings.get('dnsSettings').get('alternativeDns').setValue(this.networkSettings.ethernetSettings.dnsSettings.alternativeDns);
   
-      this.networkSettingsForm.get('wirelessSettings').get('isEnabledWifi').setValue(this.networkSettings.wirelessSettings.isEnabledWifi);
-      this.networkSettingsForm.get('wirelessSettings').get('networkName').setValue(this.networkSettings.wirelessSettings.networkName);
-      this.networkSettingsForm.get('wirelessSettings').get('isEnabledWireless').setValue(this.networkSettings.wirelessSettings.isEnabledWireless);
-      this.networkSettingsForm.get('wirelessSettings').get('securityKey').setValue(this.networkSettings.wirelessSettings.securityKey);
-      this.networkSettingsForm.get('wirelessSettings').get('ipSettings').get('isAutoIpAdress').setValue(this.networkSettings.wirelessSettings.ipSettings.isAutoIpAdress);
-      this.networkSettingsForm.get('wirelessSettings').get('ipSettings').get('ipAdress').setValue(this.networkSettings.wirelessSettings.ipSettings.ipAdress);
-      this.networkSettingsForm.get('wirelessSettings').get('ipSettings').get('masck').setValue(this.networkSettings.wirelessSettings.ipSettings.masck);
-      this.networkSettingsForm.get('wirelessSettings').get('ipSettings').get('gateway').setValue(this.networkSettings.wirelessSettings.ipSettings.gateway);
-      this.networkSettingsForm.get('wirelessSettings').get('dnsSettings').get('isAutoDnsAdress').setValue(this.networkSettings.wirelessSettings.dnsSettings.isAutoDnsAdress);
-      this.networkSettingsForm.get('wirelessSettings').get('dnsSettings').get('preferredDns').setValue(this.networkSettings.wirelessSettings.dnsSettings.preferredDns);
-      this.networkSettingsForm.get('wirelessSettings').get('dnsSettings').get('alternativeDns').setValue(this.networkSettings.wirelessSettings.dnsSettings.alternativeDns);
+      getWirelessSettings.get('isEnabledWifi').setValue(this.networkSettings.wirelessSettings.isEnabledWifi);
+      getWirelessSettings.get('networkName').setValue(this.networkSettings.wirelessSettings.networkName);
+      getWirelessSettings.get('isEnabledWireless').setValue(this.networkSettings.wirelessSettings.isEnabledWireless);
+      getWirelessSettings.get('securityKey').setValue(this.networkSettings.wirelessSettings.securityKey);
+      getWirelessSettings.get('ipSettings').get('isAutoIpAdress').setValue(this.networkSettings.wirelessSettings.ipSettings.isAutoIpAdress);
+      getWirelessSettings.get('ipSettings').get('ipAdress').setValue(this.networkSettings.wirelessSettings.ipSettings.ipAdress);
+      getWirelessSettings.get('ipSettings').get('masck').setValue(this.networkSettings.wirelessSettings.ipSettings.masck);
+      getWirelessSettings.get('ipSettings').get('gateway').setValue(this.networkSettings.wirelessSettings.ipSettings.gateway);
+      getWirelessSettings.get('dnsSettings').get('isAutoDnsAdress').setValue(this.networkSettings.wirelessSettings.dnsSettings.isAutoDnsAdress);
+      getWirelessSettings.get('dnsSettings').get('preferredDns').setValue(this.networkSettings.wirelessSettings.dnsSettings.preferredDns);
+      getWirelessSettings.get('dnsSettings').get('alternativeDns').setValue(this.networkSettings.wirelessSettings.dnsSettings.alternativeDns);
     }
   }
 
   private subscribeOnIpSettings(settingName: string) {
-    this.networkSettingsForm.get(settingName).get('ipSettings').get('isAutoIpAdress').valueChanges.subscribe((value: string) => {
+    const getIpSettings = this.networkSettingsForm.get(settingName).get('ipSettings');
+    getIpSettings.get('isAutoIpAdress').valueChanges.subscribe((value: string) => {
       console.log(value)
       if (value === 'false') {
 
-        this.networkSettingsForm.get(settingName).get('ipSettings').get('ipAdress').enable();
-        this.networkSettingsForm.get(settingName).get('ipSettings').get('masck').enable();
-        this.networkSettingsForm.get(settingName).get('ipSettings').get('gateway').enable();
+        getIpSettings.get('ipAdress').enable();
+        getIpSettings.get('masck').enable();
+        getIpSettings.get('gateway').enable();
 
-        this.networkSettingsForm.get(settingName).get('ipSettings').get('ipAdress').setValidators([Validators.required]);
-        this.networkSettingsForm.get(settingName).get('ipSettings').get('masck').setValidators([Validators.required]);
-        this.networkSettingsForm.get(settingName).get('ipSettings').get('gateway').setValidators([]);
+        getIpSettings.get('ipAdress').setValidators([Validators.required]);
+        getIpSettings.get('masck').setValidators([Validators.required]);
+        getIpSettings.get('gateway').setValidators([]);
       } else {
-        this.networkSettingsForm.get(settingName).get('ipSettings').get('ipAdress').disable();
-        this.networkSettingsForm.get(settingName).get('ipSettings').get('masck').disable();
-        this.networkSettingsForm.get(settingName).get('ipSettings').get('gateway').disable();
+        getIpSettings.get('ipAdress').disable();
+        getIpSettings.get('masck').disable();
+        getIpSettings.get('gateway').disable();
 
-        this.networkSettingsForm.get(settingName).get('ipSettings').get('ipAdress').reset('');
-        this.networkSettingsForm.get(settingName).get('ipSettings').get('masck').reset('');
-        this.networkSettingsForm.get(settingName).get('ipSettings').get('gateway').reset('');
+        getIpSettings.get('ipAdress').reset('');
+        getIpSettings.get('masck').reset('');
+        getIpSettings.get('gateway').reset('');
 
-        this.networkSettingsForm.get(settingName).get('ipSettings').get('ipAdress').clearValidators();
-        this.networkSettingsForm.get(settingName).get('ipSettings').get('masck').clearValidators();
-        this.networkSettingsForm.get(settingName).get('ipSettings').get('gateway').clearValidators();
+        getIpSettings.get('ipAdress').clearValidators();
+        getIpSettings.get('masck').clearValidators();
+        getIpSettings.get('gateway').clearValidators();
       }
 
-      this.networkSettingsForm.get(settingName).get('ipSettings').get('ipAdress').updateValueAndValidity();
-      this.networkSettingsForm.get(settingName).get('ipSettings').get('masck').updateValueAndValidity();
-      this.networkSettingsForm.get(settingName).get('ipSettings').get('gateway').updateValueAndValidity();
+      getIpSettings.get('ipAdress').updateValueAndValidity();
+      getIpSettings.get('masck').updateValueAndValidity();
+      getIpSettings.get('gateway').updateValueAndValidity();
     })
   }
 
   private subscribeOnDnsSettings(settingName: string) {
-    this.networkSettingsForm.get(settingName).get('dnsSettings').get('isAutoDnsAdress').valueChanges.subscribe((value: string) => {
+    const getDnsSettings = this.networkSettingsForm.get(settingName).get('dnsSettings');
+    getDnsSettings.get('isAutoDnsAdress').valueChanges.subscribe((value: string) => {
       if (value === 'false') {
         console.log(value)
-        this.networkSettingsForm.get(settingName).get('dnsSettings').get('preferredDns').enable();
-        this.networkSettingsForm.get(settingName).get('dnsSettings').get('alternativeDns').enable();
+        getDnsSettings.get('preferredDns').enable();
+        getDnsSettings.get('alternativeDns').enable();
 
-        this.networkSettingsForm.get(settingName).get('dnsSettings').get('preferredDns').setValidators([Validators.required]);
-        this.networkSettingsForm.get(settingName).get('dnsSettings').get('alternativeDns').setValidators([]);
+        getDnsSettings.get('preferredDns').setValidators([Validators.required]);
+        getDnsSettings.get('alternativeDns').setValidators([]);
       } else {
-        this.networkSettingsForm.get(settingName).get('dnsSettings').get('preferredDns').disable();
-        this.networkSettingsForm.get(settingName).get('dnsSettings').get('alternativeDns').disable();
+        getDnsSettings.get('preferredDns').disable();
+        getDnsSettings.get('alternativeDns').disable();
 
-        this.networkSettingsForm.get(settingName).get('dnsSettings').get('preferredDns').reset('');
-        this.networkSettingsForm.get(settingName).get('dnsSettings').get('alternativeDns').reset('');
+        getDnsSettings.get('preferredDns').reset('');
+        getDnsSettings.get('alternativeDns').reset('');
 
-        this.networkSettingsForm.get(settingName).get('dnsSettings').get('preferredDns').clearValidators();
-        this.networkSettingsForm.get(settingName).get('dnsSettings').get('alternativeDns').clearValidators();
+        getDnsSettings.get('preferredDns').clearValidators();
+        getDnsSettings.get('alternativeDns').clearValidators();
       }
 
-      this.networkSettingsForm.get(settingName).get('dnsSettings').get('preferredDns').updateValueAndValidity();
-      this.networkSettingsForm.get(settingName).get('dnsSettings').get('alternativeDns').updateValueAndValidity();
+      getDnsSettings.get('preferredDns').updateValueAndValidity();
+      getDnsSettings.get('alternativeDns').updateValueAndValidity();
     })
   }
 }
